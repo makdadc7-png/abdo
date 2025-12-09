@@ -509,14 +509,62 @@ def admin_dashboard():
     conn = get_conn()
     cur = conn.cursor()
 
+    # عدد الحجوزات
     cur.execute("SELECT COUNT(*) FROM demandes")
-    total_res = cur.fetchone()[0]
+    total_reservations = cur.fetchone()[0] or 0
 
-    cur.execute("SELECT COUNT(*) FROM clients")
-    total_cli = cur.fetchone()[0]
-
+    # عدد السيارات كاملة
     cur.execute("SELECT COUNT(*) FROM voitures")
-    total_voits = cur.fetchone()[0]
+    total_voits = cur.fetchone()[0] or 0  # إلا محتاجاه فشي بلاصة أخرى
+
+    # المتاحين
+    cur.execute("SELECT COUNT(*) FROM voitures WHERE statut='Disponible'")
+    total_disponibles = cur.fetchone()[0] or 0
+
+    # المكرايين
+    cur.execute("SELECT COUNT(*) FROM voitures WHERE statut='Louée'")
+    total_loues = cur.fetchone()[0] or 0
+
+    # عدد الزبناء
+    cur.execute("SELECT COUNT(*) FROM clients")
+    total_clients = cur.fetchone()[0] or 0
+
+    conn.close()
+
+    return render_template(
+        "admin_dashboard.html",
+        total_reservations=total_reservations,
+        total_disponibles=total_disponibles,
+        total_loues=total_loues,
+        total_clients=total_clients,
+        total_voits=total_voits  # خليه احتياط
+    )
+
+    if not require_admin():
+        return redirect(url_for("login"))
+
+    conn = get_conn()
+    cur = conn.cursor()
+
+    # مجموع الطلبات
+    cur.execute("SELECT COUNT(*) FROM demandes")
+    total_res = cur.fetchone()[0] or 0
+
+    # مجموع الزبناء
+    cur.execute("SELECT COUNT(*) FROM clients")
+    total_cli = cur.fetchone()[0] or 0
+
+    # مجموع السيارات
+    cur.execute("SELECT COUNT(*) FROM voitures")
+    total_voits = cur.fetchone()[0] or 0
+
+    # السيارات المتاحة
+    cur.execute("SELECT COUNT(*) FROM voitures WHERE statut='Disponible'")
+    total_dispo = cur.fetchone()[0] or 0
+
+    # السيارات المكرايين
+    cur.execute("SELECT COUNT(*) FROM voitures WHERE statut='Louée'")
+    total_loues = cur.fetchone()[0] or 0
 
     conn.close()
 
@@ -524,7 +572,9 @@ def admin_dashboard():
         "admin_dashboard.html",
         total_res=total_res,
         total_cli=total_cli,
-        total_voits=total_voits
+        total_voits=total_voits,
+        total_dispo=total_dispo,
+        total_loues=total_loues
     )
 
 

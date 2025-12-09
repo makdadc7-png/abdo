@@ -3,7 +3,11 @@
 <h1>Contrats</h1>
 
 <a class="btn-small" href="{{ url_for('admin_contrat_new') }}">+ Nouveau contrat</a>
-
+<div style="margin-bottom:15px;">
+  <a href="{{ url_for('admin_contrat_new') }}" class="btn btn-primary">
+    + Nouveau contrat
+  </a>
+</div>
 <table class="tbl admin-table" style="margin-top:12px;">
   <thead>
     <tr>
@@ -31,11 +35,7 @@
           Manuel
         {% endif %}
       </td>
-      <td>
-        <a class="btn-small" href="{{ url_for('admin_facture', rid=c.demande_id) if c.demande_id else url_for('admin_contrat_view', cid=c.id) }}">
-          Voir
-        </a>
-      </td>
+     
     </tr>
     {% endfor %}
   </tbody>
