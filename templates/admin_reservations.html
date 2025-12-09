@@ -1,0 +1,93 @@
+{% extends "base_admin.html" %}
+{% block content %}
+<h1>Réservations</h1>
+
+<form method="get" class="admin-filter">
+  <div class="admin-filter-group">
+    <label>
+      Client
+      <input type="text" name="client" placeholder="Nom du client..."
+             value="{{ request.args.get('client', '') }}">
+    </label>
+    <label>
+      Voiture
+      <input type="text" name="voiture" placeholder="Nom de la voiture..."
+             value="{{ request.args.get('voiture', '') }}">
+    </label>
+    <label>
+      Date
+      <input type="date" name="date" value="{{ request.args.get('date', '') }}">
+    </label>
+  </div>
+    <div class="admin-filter-actions">
+    <button type="submit" class="btn-filter">Filtrer</button>
+    <a href="{{ url_for('admin_reservations') }}"
+       class="btn-filter btn-filter-secondary">
+      Réinitialiser
+    </a>
+  </div>
+
+</form>
+
+<table class="tbl admin-table">
+  <thead>
+    <tr>
+      <th>Client</th>
+      <th>Voiture</th>
+      <th>Date début</th>
+      <th>Date fin</th>
+      <th>Statut</th>
+      <th>Détails</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in demandes %}
+    <tr>
+      <td>
+        {{ r.nom }}<br>
+        <span class="muted">{{ r.tel }}</span>
+      </td>
+      <td>{{ r.voiture }}</td>
+      <td>{{ r.date_debut }}</td>
+      <td>{{ r.date_fin }}</td>
+      <td class="col-statut">
+  <div class="statut-dropdown">
+
+    {# الزر الرئيسي: اللون حسب statut الحالي #}
+    <button type="button"
+            class="status-badge statut-btn
+            {% if r.statut == 'En attente' %}pending{% elif r.statut == 'Confirmée' %}confirmed{% else %}cancelled{% endif %}">
+      {{ r.statut }}
+      <span class="caret">▾</span>
+    </button>
+
+    {# المينو اللي كيتحل و فيها 3 اختيارات #}
+    <div class="statut-menu">
+      <a class="statut-item pending"
+         href="{{ url_for('admin_change_statut', rid=r.id, st='En attente') }}">
+        En attente
+      </a>
+
+      <a class="statut-item confirmed"
+         href="{{ url_for('admin_change_statut', rid=r.id, st='Confirmée') }}">
+        Confirmée
+      </a>
+
+      <a class="statut-item cancelled"
+         href="{{ url_for('admin_change_statut', rid=r.id, st='Annulée') }}">
+        Annulée
+      </a>
+    </div>
+  </div>
+</td>
+
+
+
+      <td>
+        <a class="btn-small" href="{{ url_for('admin_res_detail', rid=r.id) }}">Détails</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

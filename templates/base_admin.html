@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - AutoRent</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_style.css') }}">
+</head>
+<body>
+    <nav class="admin-nav">
+        <div class="admin-logo">Auto<span>Rent</span> - Admin</div>
+        <div class="admin-links">
+            <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('admin_reservations') }}">Réservations</a>
+            <a href="{{ url_for('admin_clients') }}">Clients</a>
+            <a href="{{ url_for('admin_voitures') }}">Voitures</a>
+            <a href="{{ url_for('logout') }}" class="logout">Déconnexion</a>
+        </div>
+    </nav>
+
+    <main class="admin-content">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

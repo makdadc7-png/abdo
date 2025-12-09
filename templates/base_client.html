@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang='fr'>
+<head>
+  <meta charset='UTF-8'>
+  <title>{{ title or "AutoRent" }}</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' href='{{ url_for("static", filename="style.css") }}'>
+</head>
+<body class='client'>
+<header class="nav-togglebar">
+  <div class="container nav-togglebar-inner">
+    <a class="logo" href="{{ url_for('index') }}">Auto<span>Rent</span></a>
+    <nav class="toggle-menu">
+      <a href="{{ url_for('index') }}" class="toggle-item {% if request.path == '/' %}active{% endif %}">Accueil</a>
+      <a href="{{ url_for('nos_voitures') }}" class="toggle-item {% if 'nos-voitures' in request.path %}active{% endif %}">Nos voitures</a>
+    </nav>
+    <a class="btn-cta" href="{{ url_for('contact') }}">Contactez-nous</a>
+  </div>
+</header>
+<main class='page'>
+  {% block content %}{% endblock %}
+</main>
+<footer class='footer'>© 2025 AutoRent</footer>
+</body>
+</html>

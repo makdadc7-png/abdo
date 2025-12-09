@@ -1,0 +1,46 @@
+{% extends "base_admin.html" %}
+{% block content %}
+<h1>Voitures</h1>
+
+<table class="tbl">
+  <tr>
+    <th>#</th>
+    <th>Photo</th>
+    <th>Nom</th>
+    <th>Catégorie</th>
+    <th>Prix/jour</th>
+  </tr>
+  {% for v in voitures %}
+  <tr>
+    <td>{{ v.id }}</td>
+    <td>
+      {% if v.image %}
+        <img src="{{ url_for('static', filename='uploads/' ~ v.image) }}" class="car-thumb">
+      {% else %}
+        -
+      {% endif %}
+    </td>
+    <td>{{ v.nom }}</td>
+    <td>{{ v.categorie }}</td>
+    <td>{{ v.prix_jour or '-' }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>Ajouter une voiture</h2>
+<form method="POST" enctype="multipart/form-data" class="form-inline">
+  <label>Nom
+    <input name="nom">
+  </label>
+  <label>Catégorie
+    <input name="categorie">
+  </label>
+  <label>Prix/jour
+    <input name="prix_jour">
+  </label>
+  <label>Photo
+    <input type="file" name="image" accept="image/*">
+  </label>
+  <button class="btn" type="submit">Ajouter</button>
+</form>
+{% endblock %}

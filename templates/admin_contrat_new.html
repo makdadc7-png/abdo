@@ -1,0 +1,53 @@
+{% extends "base_admin.html" %}
+{% block content %}
+<h1>Nouveau contrat</h1>
+
+<form method="post" class="admin-form">
+
+  <h2>Locataire 1</h2>
+  <label>Nom & prénom
+    <input name="client_nom" required>
+  </label>
+  <label>N° CIN
+    <input name="client_cin">
+  </label>
+  <label>N° Permis
+    <input name="client_permis">
+  </label>
+  <label>Année permis
+    <input name="annee_permis">
+  </label>
+
+  <h2 style="margin-top:12px;">Locataire 2</h2>
+  <label>Nom & prénom
+    <input name="client2_nom">
+  </label>
+  <label>N° CIN
+    <input name="client2_cin">
+  </label>
+  <label>N° Permis
+    <input name="client2_permis">
+  </label>
+  <label>Année permis
+    <input name="client2_annee_permis">
+  </label>
+
+  <h2 style="margin-top:12px;">Véhicule</h2>
+  <label>Voiture louée
+    <select name="voiture_nom" required>
+      {% for v in voitures %}
+        <option value="{{ v.nom }}">{{ v.nom }} — {{ v.categorie }} ({{ v.prix_jour }} DH/j)</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label>Date début
+    <input type="date" name="date_debut" required>
+  </label>
+  <label>Date fin
+    <input type="date" name="date_fin" required>
+  </label>
+
+  <button class="btn-filter" type="submit">Créer le contrat</button>
+</form>
+{% endblock %}

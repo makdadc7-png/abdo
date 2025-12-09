@@ -1,0 +1,212 @@
+{% extends "base_admin.html" %}
+{% block content %}
+
+<div class="facture-page">
+<div class="print-actions">
+  <button class="btn-print" onclick="window.print()">Imprimer</button>
+</div>
+
+  <!-- HEADER -->
+  <header class="facture-header">
+    <div>
+      <h1>Contrat de location</h1>
+      <p class="muted">
+  Contrat n° {{ d.id }} – généré le {{ today or "" }}
+</p>
+
+    </div>
+    <div class="facture-logo">
+      <span class="logo-main">Auto<span>Rent</span></span>
+      <p class="muted small">Espace administrateur</p>
+    </div>
+  </header>
+
+  <!-- LOCATAIRE / VEHICULE -->
+  <!-- LAYOUT 2x2: locataires يسار، véhicule فوق يمين، location تحت يمين -->
+<div class="facture-grid-2x2">
+
+  <!-- يسار فوق: Locataire 1 -->
+  <section class="facture-block">
+    <h2>Locataire 1</h2>
+
+    <div class="facture-field">
+      <span class="label">Nom et prénom</span>
+      <span class="value">{{ d.nom }}</span>
+    </div>
+
+    <div class="facture-field">
+      <span class="label">N° CIN</span>
+      <span class="value medium">___________________</span>
+    </div>
+
+    <div class="facture-field">
+      <span class="label">N° permis</span>
+      <span class="value medium">___________________</span>
+    </div>
+
+    <div class="facture-field">
+      <span class="label">Année de permis</span>
+      <span class="value small">________</span>
+    </div>
+  </section>
+
+  <!-- يمين فوق: Véhicule loué -->
+  <section class="facture-block">
+    <h2>Véhicule loué</h2>
+
+    <div class="facture-field">
+      <span class="label">Modèle</span>
+      <span class="value">{{ d.voiture }}</span>
+    </div>
+
+    <div class="facture-field">
+      <span class="label">Catégorie</span>
+      <span class="value">{{ v.categorie if v else "—" }}</span>
+    </div>
+
+    <div class="facture-field">
+      <span class="label">Immatriculation</span>
+      <span class="value medium">{{ v.immatriculation if v else "—" }}</span>
+    </div>
+  </section>
+
+  <!-- يسار تحت: Locataire 2 -->
+  <section class="facture-block">
+    <h2>Locataire 2</h2>
+
+    <div class="facture-field">
+      <span class="label">Nom et prénom</span>
+      <span class="value">______________________________</span>
+    </div>
+
+    <div class="facture-field">
+      <span class="label">N° CIN</span>
+      <span class="value medium">___________________</span>
+    </div>
+
+    <div class="facture-field">
+      <span class="label">N° permis</span>
+      <span class="value medium">___________________</span>
+    </div>
+
+    <div class="facture-field">
+      <span class="label">Année de permis</span>
+      <span class="value small">________</span>
+    </div>
+  </section>
+
+  <!-- يمين تحت: La location -->
+  <section class="facture-block">
+    <h2>La location</h2>
+
+    <div class="facture-field">
+      <span class="label">Date début</span>
+      <span class="value">{{ d.date_debut }} à ____ h ____</span>
+    </div>
+
+    <div class="facture-field">
+      <span class="label">Date fin</span>
+      <span class="value">{{ d.date_fin }} à ____ h ____</span>
+    </div>
+
+    <div class="facture-field">
+      <span class="label">Durée</span>
+      <span class="value small">{{ jours }} jour(s)</span>
+    </div>
+
+    <div class="facture-field">
+      <span class="label">Prix / jour</span>
+      <span class="value small">
+        {% if prix_jour %}{{ '%.0f'|format(prix_jour) }} DH{% else %}—{% endif %}
+      </span>
+    </div>
+
+    <div class="facture-field">
+      <span class="label">Total</span>
+      <span class="value small">
+        {% if total %}{{ '%.0f'|format(total) }} DH{% else %}—{% endif %}
+      </span>
+    </div>
+  </section>
+
+</div>
+
+
+  <!-- ETAT AVANT LOCATION / COMPTEUR -->
+  <div class="facture-grid-2">
+    <section class="facture-block">
+      <h2>État du véhicule avant la location</h2>
+      <div class="schema-container">
+    <img src="{{ url_for('static', filename='car_schema.png') }}" alt="Schéma véhicule" class="car-schema">
+</div>
+
+      
+      <p class="muted small">
+        Noter sur ce schéma les rayures, chocs ou dommages visibles sur la carrosserie.
+      </p>
+      <p class="mt-8"><span class="muted">Observations :</span></p>
+      <div class="facture-lines"></div>
+    </section>
+
+    <section class="facture-block">
+      <h2>Compteur & carburant au départ</h2>
+      <p><span class="muted">Compteur :</span> _________ km</p>
+      <p><span class="muted">Carburant :</span></p>
+      <div class="fuel-gauge">
+        <span>0</span>
+        <div class="fuel-bar">
+          <div class="fuel-level"></div>
+        </div>
+        <span>plein</span>
+      </div>
+      <p class="mt-8"><span class="muted">État extérieur :</span></p>
+      <div class="facture-lines small"></div>
+      <p class="mt-8"><span class="muted">État intérieur :</span></p>
+      <div class="facture-lines small"></div>
+    </section>
+  </div>
+
+  <!-- RETOUR -->
+  <div class="facture-grid-2">
+    <section class="facture-block">
+      <h2>À remplir au retour</h2>
+      <p><span class="muted">Date et heure réelles de fin :</span> ____ / ____ / ______ à ____ h ____</p>
+      <p><span class="muted">Compteur au retour :</span> _________ km</p>
+      <p><span class="muted">Kilométrage parcouru :</span> _________ km</p>
+      <p class="mt-8"><span class="muted">État du véhicule :</span></p>
+      <label class="checkbox-line">
+        <input type="checkbox"> Aucun dommage – dépôt de garantie restitué
+      </label>
+      <label class="checkbox-line">
+        <input type="checkbox"> Dommages légers – dépôt de garantie restitué partiellement
+      </label>
+      <label class="checkbox-line">
+        <input type="checkbox"> Dommages importants – dépôt de garantie encaissé
+      </label>
+      <p class="muted small mt-8">
+        Indiquer tous les détails des dommages éventuels sur papier libre signé par les deux parties.
+      </p>
+    </section>
+
+    <section class="facture-block">
+      <h2>Signatures</h2>
+      <div class="sign-row">
+        <div>
+          <p class="muted">Signature du locataire :</p>
+          <div class="signature-box"></div>
+        </div>
+        <div>
+          <p class="muted">Signature de l’agence :</p>
+          <div class="signature-box"></div>
+        </div>
+      </div>
+      <p class="muted small mt-16">
+        Le locataire reconnaît avoir lu et accepté les conditions générales de location
+        de AutoRent.
+      </p>
+    </section>
+  </div>
+
+</div>
+
+{% endblock %}

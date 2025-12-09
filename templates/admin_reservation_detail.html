@@ -1,0 +1,103 @@
+{% extends "base_admin.html" %}
+{% block content %}
+
+<div class="detail-header">
+  <h1>Détail de réservation</h1>
+  <a class="btn-small btn-secondary"
+     href="{{ url_for('admin_reservations') }}">← Retour aux réservations</a>
+</div>
+
+<div class="detail-grid">
+  <!-- Carte client -->
+  <section class="detail-card">
+    <h2>Informations du client</h2>
+    <p class="detail-main">{{ d.nom }}</p>
+    <p><span class="muted">Téléphone :</span> {{ d.tel }}</p>
+    <p><span class="muted">Email :</span> {{ d.email or '-' }}</p>
+    <p><span class="muted">Ville :</span> {{ d.ville or '-' }}</p>
+  </section>
+
+  <!-- Carte voiture -->
+  <section class="detail-card">
+    <h2>Voiture</h2>
+
+    {% if v and v.image %}
+      <div class="detail-car-image">
+        <img src="{{ url_for('static', filename='uploads/' ~ v.image) }}"
+             alt="{{ d.voiture }}">
+      </div>
+    {% endif %}
+
+    <p class="detail-main">{{ d.voiture }}</p>
+    <p><span class="muted">Catégorie :</span> {{ v.categorie if v else '-' }}</p>
+    <p>
+      <span class="muted">Prix / jour :</span>
+      {% if prix_jour %}
+        {{ '%.0f'|format(prix_jour) }} DH / jour
+      {% else %}
+        -
+      {% endif %}
+    </p>
+    {% if v and v.statut %}
+      <p>
+        <span class="muted">Statut voiture :</span>
+        <span class="status-badge {{ v.statut|lower }}">
+          {{ v.statut }}
+        </span>
+      </p>
+    {% endif %}
+  </section>
+</div>
+
+<div class="detail-grid">
+  <!-- Carte période + prix -->
+  <section class="detail-card">
+    <h2>Période & prix</h2>
+    <p><span class="muted">Date de début :</span> {{ d.date_debut }}</p>
+    <p><span class="muted">Date de fin :</span> {{ d.date_fin }}</p>
+    <p><span class="muted">Nombre de jours :</span> {{ jours }}</p>
+    <p>
+      <span class="muted">Prix total estimé :</span>
+      {% if total %}
+        <strong>{{ '%.0f'|format(total) }} DH</strong>
+      {% else %}
+        -
+      {% endif %}
+    </p>
+  </section>
+
+  <!-- Carte statut + actions -->
+  <section class="detail-card">
+    <h2>Statut de la réservation</h2>
+
+    <p>
+      {% if d.statut == "Confirmée" %}
+        <span class="status-badge confirmed">Confirmée</span>
+      {% elif d.statut == "Annulée" %}
+        <span class="status-badge cancelled">Annulée</span>
+      {% else %}
+        <span class="status-badge pending">En attente</span>
+      {% endif %}
+    </p>
+
+    {% if d.statut == "En attente" %}
+      <div class="detail-actions">
+        <a class="btn-small"
+           href="{{ url_for('admin_change_statut', rid=d.id, st='Confirmée') }}">
+          Confirmer
+        </a>
+        <a class="btn-small btn-secondary danger"
+           href="{{ url_for('admin_change_statut', rid=d.id, st='Annulée') }}">
+          Annuler
+        </a>
+      </div>
+    {% elif d.statut == "Confirmée" %}
+      <a class="btn-small"
+         href="{{ url_for('admin_facture', rid=d.id) }}">
+        Voir le contrat / facture
+      </a>
+    {% endif %}
+  </section>
+</div>
+
+{% endblock %}

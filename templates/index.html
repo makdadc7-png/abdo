@@ -1,0 +1,151 @@
+{% extends "base_client.html" %}
+{% block content %}
+
+<section class="hero-banner">
+  <div class="hero-banner-inner container">
+    <!-- Texte à gauche -->
+    <div class="hero-text">
+      <p class="hero-pill">Location de voitures</p>
+
+      <h1>
+        La meilleure voiture<br>
+        pour votre location aujourd'hui
+      </h1>
+
+      <p class="hero-desc">
+        Réservez votre voiture en quelques minutes et profitez de nos offres spéciales.
+      </p>
+
+      <div class="hero-cta-row">
+        <a href="{{ url_for('nos_voitures') }}" class="btn btn-hero-orange">
+          Louer maintenant
+        </a>
+
+        <div class="hero-phone">
+          <span class="phone-label">Appelez-nous</span>
+          <span class="phone-number">+212 6 00 00 00 00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Voiture à droite -->
+    <div class="hero-visual">
+      <div class="hero-car-card-orange"
+           style="background-image: url('{{ url_for('static', filename='hero_car.png') }}');">
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Simple Search Bar under Banner ===== -->
+
+
+<section class="how container">
+  <h2>Comment ça marche</h2>
+  <p class="muted">Réservez en 3 étapes simples.</p>
+
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-icon">📍</div>
+      <h3>Choisissez un lieu</h3>
+      <p class="muted">Sélectionnez la ville de départ.</p>
+    </div>
+
+    <div class="how-step">
+      <div class="how-icon">📅</div>
+      <h3>Choisissez vos dates</h3>
+      <p class="muted">Indiquez la période de location.</p>
+    </div>
+
+    <div class="how-step">
+      <div class="how-icon">🚗</div>
+      <h3>Réservez votre voiture</h3>
+      <p class="muted">Confirmez la demande et récupérez le véhicule.</p>
+    </div>
+  </div>
+</section>
+<section class="home-search container">
+  <form class="home-search-form" method="get" action="{{ url_for('index') }}">
+    <input
+      type="text"
+      name="q"
+      placeholder="Rechercher une voiture (ex : Clio, SUV...)"
+      value="{{ q or '' }}"
+    >
+    <button type="submit" class="btn btn-hero-orange">Rechercher</button>
+  </form>
+</section>
+{% if q and search_results %}
+<section class="search-results container">
+  <div class="section-header">
+    <h2>Résultats pour "{{ q }}"</h2>
+    <p class="muted">{{ search_results|length }} voiture(s) trouvée(s).</p>
+  </div>
+
+  <div class="cars">
+    {% for v in search_results %}
+      <article class="car-card">
+        {% if v.image %}
+          <img src="{{ url_for('static', filename='uploads/' + v.image) }}" alt="{{ v.nom }}">
+        {% else %}
+          <div class="img-placeholder">Image</div>
+        {% endif %}
+        <h3>{{ v.nom }}</h3>
+        <p class="muted">{{ v.categorie }}</p>
+        <p><strong>{{ "%.0f"|format(v.prix_jour) }} DH / jour</strong></p>
+        <a class="btn" href="{{ url_for('demande') }}?car={{ v.nom }}">Demander</a>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% elif q %}
+<section class="search-results container">
+  <div class="section-header">
+    <h2>Résultats pour "{{ q }}"</h2>
+    <p class="muted">Aucune voiture trouvée.</p>
+  </div>
+</section>
+{% endif %}
+
+<section class="popular container">
+  <div class="section-header">
+    <h2>Voitures les plus louées</h2>
+    <p class="muted">Découvrez nos modèles préférés par nos clients.</p>
+  </div>
+
+  <div class="chips">
+    <button class="chip active" type="button">Citadine</button>
+    <button class="chip" type="button">Berline</button>
+    <button class="chip" type="button">SUV</button>
+    <button class="chip" type="button">Luxe</button>
+    <button class="chip" type="button">Utilitaire</button>
+  </div>
+
+  <div class="cars">
+    {% set pop = popular_voitures if popular_voitures is defined else (voitures[:4] if voitures is defined else []) %}
+    {% for v in pop %}
+      <article class="car-card">
+        {% if v.image %}
+          <img src="{{ url_for('static', filename='uploads/' + v.image) }}" alt="{{ v.nom }}">
+        {% else %}
+          <div class="img-placeholder">Image</div>
+        {% endif %}
+
+        <h3>{{ v.nom }}</h3>
+        <p class="muted">{{ v.categorie }}</p>
+        <p><strong>{{ "%.0f"|format(v.prix_jour) }} DH / jour</strong></p>
+
+        <a class="btn" href="{{ url_for('demande') }}?car={{ v.nom }}">Demander</a>
+      </article>
+    {% else %}
+      <p class="muted">Aucune voiture.</p>
+    {% endfor %}
+  </div>
+
+  <div class="see-all">
+    <a href="{{ url_for('nos_voitures') }}">Voir tout le stock →</a>
+  </div>
+</section>
+
+{% endblock %}

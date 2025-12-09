@@ -1,0 +1,1011 @@
+body { margin:0; font-family: system-ui, sans-serif; background:#f6f7fb; color:#111; }
+* { box-sizing:border-box; }
+.container{ width:min(1100px,92%); margin:0 auto; }
+.muted{ color:#6b7280; font-size:14px; }
+h1,h2,h3{ margin:0 0 8px 0; }
+section{ padding:14px 0; }
+
+/* Buttons */
+.btn{ display:inline-block; padding:8px 12px; border-radius:999px; border:1px solid #111;
+  background:#111; color:#fff; font-weight:800; text-decoration:none; font-size:14px; cursor:pointer; transition:.2s; }
+.btn:hover{ background:#2b6cff; border-color:#2b6cff; }
+.btn-primary{ background:#2b6cff; border-color:#2b6cff; }
+.btn-primary:hover{ background:#1e55d6; border-color:#1e55d6; }
+.btn-outline{ background:transparent; color:#111; border:1px solid #111; }
+.btn-outline:hover{ background:#111; color:#fff; }
+.btn-disabled{ background:#ddd !important; color:#666 !important; cursor:not-allowed; border:none; }
+
+/* Badges */
+.badge{
+  display:inline-block; padding:4px 10px; border-radius:999px;
+  font-size:12px; font-weight:700; margin:6px 0;
+}
+.badge-green{ background:#e8fff0; color:#0f8a3c; border:1px solid #bdf5d1; }
+.badge-red{ background:#ffecec; color:#b60000; border:1px solid #ffc5c5; }
+
+/* Disable underline everywhere */
+a, a:hover, a:focus, a:active{ text-decoration:none !important; }
+
+/* Page layout */
+.page{ min-height:100vh; background:#020617; }
+
+/* ===== Login ===== */
+.login-page{ min-height:100vh; display:grid; place-items:center; background:#020617; }
+.login-box { border:1px solid #1f2937; background:#0b1220; padding:22px; border-radius:16px; width: min(360px, 92%); color:#fff; }
+.login-box h1{ font-size:22px; margin-bottom:10px; }
+.login-box label{ font-size:13px; color:#cbd5e1; display:block; margin-top:10px; }
+.login-box input{ width:100%; margin-top:6px; padding:10px 12px; border-radius:10px; border:1px solid #1f2937; background:#0f172a; color:#fff; outline:none; }
+.login-box input:focus{ border-color:#2b6cff; box-shadow:0 0 0 3px rgba(43,108,255,.12); }
+.login-box button{ width:100%; margin-top:14px; }
+
+/* ===== Toggle Navbar sombre ===== */
+.nav-togglebar{
+  background:#0f1115; position:sticky; top:0; z-index:50;
+  border-bottom:1px solid #1c1f27; box-shadow:0 8px 24px rgba(0,0,0,.35);
+}
+.nav-togglebar-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 0; gap:12px;
+}
+.nav-togglebar .logo{
+  font-weight:800; font-size:22px; text-decoration:none; color:#fff; letter-spacing:.3px;
+}
+.nav-togglebar .logo span{ color:#69a1ff; }
+
+.toggle-menu{
+  background:#1a1e27; padding:5px; border-radius:999px;
+  display:flex; gap:6px; align-items:center;
+}
+.toggle-item{
+  padding:8px 18px; border-radius:999px; text-decoration:none;
+  font-weight:800; color:#e6e6e6; transition:.2s; white-space:nowrap;
+}
+.toggle-item.active{
+  background:#2b6cff; color:#fff; box-shadow:0 6px 14px rgba(43,108,255,.35);
+}
+.toggle-item:hover{ background:#252b38; color:#fff; }
+
+.nav-togglebar .btn-cta{
+  background:#2b6cff; color:#fff; padding:9px 15px; border-radius:999px;
+  font-weight:800; text-decoration:none; box-shadow:0 10px 24px rgba(43,108,255,.35);
+}
+.nav-togglebar .btn-cta:hover{ background:#1e55d6; }
+
+/* Responsive navbar */
+@media (max-width: 768px){
+  .nav-togglebar-inner{ flex-wrap:wrap; justify-content:center; }
+  .btn-cta{ order:3; }
+}
+
+/* ===== Hero minimal ===== */
+.hero-minimal{ padding:18px 0; }
+.hero-search form{ display:flex; gap:8px; flex-wrap:wrap; }
+.hero-search input{
+  flex:1; min-width:220px; padding:10px 12px; border-radius:12px;
+  border:1px solid #e5e5e5; outline:none; font-size:15px;
+}
+.hero-search input:focus{
+  border-color:#2b6cff; box-shadow:0 0 0 3px rgba(43,108,255,.12);
+}
+
+/* ===== Admin basic styling ===== */
+.admin-wrap{ padding:18px 0; }
+.admin-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.admin-card{
+  background:#fff; border:1px solid #eee; border-radius:12px; padding:12px;
+}
+.admin-card h3{ font-size:16px; margin-bottom:6px; }
+.admin-table{ width:100%; border-collapse:collapse; font-size:14px; }
+.admin-table th, .admin-table td{ padding:8px; border-bottom:1px solid #eee; text-align:left; }
+.admin-table th{ font-weight:800; }
+.admin-actions a{ margin-right:6px; }
+
+/* Inputs / select */
+input, select, textarea{
+  font-family:inherit;
+}
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.form-control{ width:100%; padding:9px 10px; border:1px solid #e5e5e5; border-radius:10px; outline:none; }
+.form-control:focus{ border-color:#2b6cff; box-shadow:0 0 0 3px rgba(43,108,255,.12); }
+
+/* Section header */
+.section-header{ margin-bottom:8px; }
+.section-header h2{ font-size:18px; }
+.section-header p{ margin:0; }
+
+/* Image placeholder */
+.img-placeholder{
+  height:120px; background:#f1f1f1; display:grid; place-items:center;
+  color:#999; border-radius:10px; margin-bottom:6px;
+}
+
+/* ===== OLD generic cars grid (kept) ===== */
+.cars { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; margin-top:12px; }
+
+/* ===== Cars grid + cards (size like original, not stuck) ===== */
+.cars{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap:14px;
+  margin-top:12px;
+}
+.car-card{
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:8px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.car-card img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  border-radius:10px;
+  display:block;
+}
+/* ===== Accueil behance-inspired sombre ===== */
+.page { background:#020617; color:#e5e7eb; }
+
+.hero-split{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap:28px;
+  padding:28px 0 8px;
+  align-items:center;
+}
+
+.hero-left h1{
+  font-size:42px;
+  line-height:1.1;
+  font-weight:900;
+  color:#e5f3ee;
+  letter-spacing:.2px;
+}
+
+.hero-sub{
+  max-width:520px;
+  font-size:16px;
+  color:#cbd5e1;
+  margin:8px 0 16px;
+}
+
+.hero-form{
+  background:#0b1220;
+  border:1px solid #1f2937;
+  border-radius:18px;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+
+.hero-form label{
+  font-size:12px;
+  color:#a3b2c7;
+  font-weight:700;
+}
+
+.hero-form input{
+  width:100%;
+  padding:11px 12px;
+  border-radius:12px;
+  border:1px solid #1f2937;
+  background:#0f172a;
+  color:#fff;
+  outline:none;
+  font-size:14px;
+}
+
+.hero-form input:focus{
+  border-color:#ff8b3d;
+  box-shadow:0 0 0 3px rgba(255,139,61,.12);
+}
+
+.hero-form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.hero-form-btn{
+  display:flex;
+  align-items:end;
+}
+
+.btn-hero{
+  width:100%;
+  padding:12px 16px;
+  background:#ff8b3d;
+  border-color:#ff8b3d;
+  color:#111827;
+  font-weight:900;
+  letter-spacing:.3px;
+}
+
+.btn-hero:hover{
+  background:#ff7a22;
+  border-color:#ff7a22;
+}
+
+.hero-right{
+  display:grid;
+  place-items:center;
+}
+
+.hero-car-card{
+  position:relative;
+  width:100%;
+  min-height:280px;
+  border-radius:22px;
+  background: radial-gradient(1200px circle at 30% 10%,
+      #1b8a7b 0,
+      #0b3f39 40%,
+      #041b19 100%);
+  border:1px solid #0f3a36;
+  box-shadow:0 18px 40px rgba(0,0,0,.5);
+  overflow:hidden;
+}
+
+.hero-car-fallback{
+  height:100%;
+  display:grid;
+  place-items:center;
+  font-size:50px;
+  font-weight:900;
+  color:#e2fff7;
+  opacity:.25;
+}
+
+/* Comment ça marche */
+.how{
+  padding:30px 0 10px;
+  text-align:center;
+}
+
+.how h2{
+  font-size:28px;
+  margin-bottom:4px;
+  color:#e5f3ee;
+}
+
+.how-steps{
+  margin-top:16px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.how-step{
+  background:#0b1220;
+  border:1px solid #1f2937;
+  border-radius:16px;
+  padding:14px;
+}
+
+.how-icon{
+  font-size:26px;
+  margin-bottom:6px;
+}
+
+.how-step h3{
+  font-size:16px;
+  color:#fff;
+}
+
+/* Voitures les plus louées */
+.popular{
+  padding:22px 0 40px;
+}
+
+.chips{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:10px 0 12px;
+}
+
+.chip{
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid #1f2937;
+  background:#0b1220;
+  color:#e5e7eb;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.chip.active{
+  background:#1b8a7b;
+  border-color:#1b8a7b;
+  color:#041b19;
+}
+
+.see-all{
+  margin-top:8px;
+}
+
+.see-all a{
+  color:#b7c8ff;
+  font-weight:800;
+}
+
+@media (max-width: 900px){
+  .hero-split{ grid-template-columns:1fr; }
+  .hero-left h1{ font-size:34px; }
+  .how-steps{ grid-template-columns:1fr; }
+}
+/* صورة كبيرة فاليمين */
+.hero-car-card{
+  position:relative;
+  width:100%;
+  min-height:280px;
+  border-radius:22px;
+  background: radial-gradient(1200px circle at 30% 10%,
+      #1b8a7b 0,
+      #0b3f39 40%,
+      #041b19 100%);
+  border:1px solid #0f3a36;
+  box-shadow:0 18px 40px rgba(0,0,0,.5);
+  overflow:hidden;
+}
+
+.hero-car-img{
+  position:absolute;
+  right:-12%;
+  bottom:-8%;
+  width:125%;
+  max-width:none;
+  height:auto;
+  filter: drop-shadow(0 18px 30px rgba(0,0,0,.6));
+  transform: scale(1.02);
+}
+/* --- Hero Car Grande Style (Behance style) --- */
+
+.real-hero-card{
+  position: relative;
+  width: 100%;
+  height: 360px;             /* كبرت الإطار */
+  border-radius: 26px;
+  background: linear-gradient(135deg, #1c9c86 0%, #0b3f39 45%, #031b17 100%);
+  overflow: hidden;
+  border: 1px solid #0d3a34;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+}
+
+.real-hero-img{
+  position: absolute;
+  bottom: -10px;            /* تهبط شوية */
+  right: -50px;             /* تخرج لبرة شوية */
+  width: 140%;              /* كبييييرة كيما بغيتي */
+  max-width: none;
+  filter: drop-shadow(0 20px 35px rgba(0,0,0,0.6));
+  transform: scale(1.08);   /* زيادة الحجم */
+}
+/* --- Hero Car Grande Style --- */
+
+.real-hero-card{
+  position: relative;
+  width: 100%;
+  height: 380px;            /* كبير بحال الموديل */
+  border-radius: 26px;
+  background: linear-gradient(135deg, #1c9c86 0%, #0b3f39 45%, #031b17 100%);
+  overflow: hidden;
+  border: 1px solid #0d3a34;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+}
+
+.real-hero-img{
+  position: absolute;
+  bottom: -15px;
+  right: -70px;
+  width: 150%;              /* هنا كبرناها بزاف */
+  max-width: none;
+  height: auto;
+  filter: drop-shadow(0 20px 35px rgba(0,0,0,0.6));
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+.hero-car-fallback{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-size:60px;
+  font-weight:900;
+  color:#e2fff7;
+  opacity:.18;
+  z-index:1;
+}
+.real-hero-card{
+  position: relative;
+  width: 100%;
+  height: 360px;
+  border-radius: 26px;
+  background: linear-gradient(135deg, #1c9c86 0%, #0b3f39 45%, #031b17 100%);
+  overflow: hidden;
+  border: 1px solid #0d3a34;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+}
+
+.real-hero-img{
+  position: absolute;
+  bottom: -10px;
+  right: -50px;
+  width: 140%;
+  max-width: none;
+  height: auto;
+  filter: drop-shadow(0 20px 35px rgba(0,0,0,0.6));
+  transform: scale(1.08);
+}
+/* ===== HERO CAR SUPER GRANDE (Behance style) ===== */
+
+.hero-right{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.real-hero-card{
+  width:100%;
+  height:380px; /* طول كبير */
+  border-radius:26px;
+
+  /* الخلفية ديال الكادر */
+  background: linear-gradient(135deg, #1c9c86 0%, #0b3f39 45%, #031b17 100%);
+  box-shadow:0 18px 40px rgba(0,0,0,0.55);
+  border:1px solid #0d3a34;
+  overflow:hidden;
+  position:relative;
+
+  /* الصورة كخلفية */
+  background-repeat:no-repeat;
+  background-size: 165%;          /* كبرناها بزاف */
+  background-position: 85% 60%;   /* خليهـا على اليمين وهابطة شوية */
+}
+
+/* responsive */
+@media (max-width: 900px){
+  .real-hero-card{
+    height:300px;
+    background-size: 185%;
+    background-position: 80% 70%;
+  }
+}
+.real-hero-card{
+  background-image: url("../static/hero_car.png"); /* إلا ما بغيتيش jinja */
+}
+/* ===== HERO ORANGE STYLE (comme le banner) ===== */
+
+.hero-banner{
+  background:#ff9b24;
+  padding:32px 0 40px;
+}
+
+.hero-banner-inner{
+  background:#ffffff;
+  border-radius:26px;
+  padding:28px 32px;
+  display:grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap:24px;
+  align-items:center;
+  position:relative;
+  box-shadow:0 20px 45px rgba(0,0,0,0.4);
+  overflow:hidden;
+}
+
+/* Texte à gauche */
+.hero-text h1{
+  font-size:38px;
+  line-height:1.1;
+  font-weight:900;
+  color:#111827;
+  margin:0 0 10px 0;
+}
+.hero-desc{
+  margin:0 0 18px 0;
+  color:#4b5563;
+  font-size:15px;
+  max-width:420px;
+}
+.hero-pill{
+  display:inline-block;
+  padding:4px 12px;
+  border-radius:999px;
+  border:1px solid #f97316;
+  color:#f97316;
+  font-weight:700;
+  font-size:12px;
+  margin-bottom:10px;
+}
+
+.hero-cta-row{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.btn-hero-orange{
+  background:#f97316;
+  border-color:#f97316;
+  color:#fff;
+  font-weight:800;
+  padding:11px 22px;
+  border-radius:999px;
+  text-decoration:none;
+  box-shadow:0 10px 25px rgba(249,115,22,0.45);
+}
+.btn-hero-orange:hover{
+  background:#ea580c;
+  border-color:#ea580c;
+}
+
+.hero-phone{
+  display:flex;
+  flex-direction:column;
+  font-size:13px;
+}
+.hero-phone .phone-label{
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#9ca3af;
+  font-weight:700;
+}
+.hero-phone .phone-number{
+  color:#111827;
+  font-weight:800;
+  font-size:15px;
+}
+
+/* Voiture à droite */
+.hero-visual{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.hero-car-card-orange{
+  width:100%;
+  height:260px;
+  border-radius:24px;
+  background-color:#111827;
+  background-repeat:no-repeat;
+  background-size:165%;
+  background-position:80% 60%;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Badge -50% */
+.hero-discount{
+  position:absolute;
+  left:18px;
+  top:24px;
+  background:#111827;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:999px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:2px;
+}
+.hero-discount span{
+  font-size:18px;
+  font-weight:900;
+  line-height:1;
+  color:#facc15;
+}
+.hero-discount small{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .hero-banner-inner{
+    grid-template-columns:1fr;
+    padding:22px 18px;
+  }
+  .hero-text h1{
+    font-size:30px;
+  }
+  
+}
+.hero-car-card-orange{
+  width:100%;
+  height:260px;
+  border-radius:24px;
+  background-color:#111827;
+  background-repeat:no-repeat;
+  background-size:100%;
+  background-position:80% 60%;
+}
+/* ===== SEARCH BAR HOME ===== */
+
+.home-search{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.home-search-form{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.home-search-form input{
+  flex: 1;
+  min-width: 280px;
+  padding: 12px 15px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #0f172a;
+  color: #e5e7eb;
+  outline: none;
+  font-size: 15px;
+}
+
+.home-search-form button{
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+}
+
+
+/* Rented look */
+.car-rented{ opacity:.7; }
+/* ===== Demande page ===== */
+.demande-wrap{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 18px 70px;
+}
+
+.demande-hero{
+  display:flex;
+  gap:16px;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.demande-hero h1{
+  font-size: 32px;
+  margin: 0 0 6px;
+  color:#fff;
+}
+.demande-hero p{
+  margin:0;
+  opacity:.85;
+  color:#cfd7ff;
+}
+
+.selected-car{
+  background: rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  padding:14px 16px;
+  border-radius:14px;
+  min-width:240px;
+  backdrop-filter: blur(6px);
+}
+.selected-car .badge{
+  font-size:12px;
+  opacity:.8;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+}
+.selected-car .car-name{
+  font-size:18px;
+  font-weight:700;
+  margin-top:6px;
+}
+.selected-car .car-hint{
+  font-size:12px;
+  opacity:.7;
+  margin-top:4px;
+}
+
+.demande-grid{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:16px;
+}
+
+.demande-card,
+.info-card{
+  background: rgba(8,12,28,0.9);
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:18px;
+  padding:18px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+}
+
+.demande-card h2{
+  margin:0 0 14px;
+  font-size:18px;
+  color:#fff;
+  opacity:.95;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  gap:12px;
+}
+
+.field label{
+  display:block;
+  font-size:13px;
+  margin:0 0 6px;
+  color:#cfe0ff;
+}
+.field label span{ color:#7fb1ff; }
+
+.field input, .field textarea{
+  width:100%;
+  background: rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  color:#fff;
+  padding:10px 12px;
+  border-radius:10px;
+  outline:none;
+  transition:.15s;
+}
+.field input:focus, .field textarea:focus{
+  border-color:#5b8cff;
+  box-shadow: 0 0 0 3px rgba(91,140,255,.18);
+}
+
+.field-full{ grid-column: 1 / -1; }
+
+.err{
+  display:block;
+  margin-top:6px;
+  color:#ff9a9a;
+  font-size:12px;
+}
+
+.btn-primary{
+  width:100%;
+  margin-top:12px;
+  padding:11px 14px;
+  border-radius:12px;
+  border:none;
+  cursor:pointer;
+  background: linear-gradient(135deg,#4b7bff,#6ad7ff);
+  color:#061029;
+  font-weight:800;
+  letter-spacing:.3px;
+  transition:.15s;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+
+.mini-note{
+  font-size:12px;
+  opacity:.7;
+  margin-top:10px;
+  text-align:center;
+  color:#cfd7ff;
+}
+
+.info-card h3{
+  margin:4px 0 10px;
+  font-size:17px;
+  color:#fff;
+}
+.info-card ul{
+  margin:0;
+  padding-left:18px;
+  color:#dbe4ff;
+  opacity:.9;
+}
+.info-card li{ margin:8px 0; }
+
+.support-box{
+  margin-top:14px;
+  padding:12px;
+  border-radius:12px;
+  background: rgba(255,255,255,0.06);
+  border:1px dashed rgba(255,255,255,0.18);
+}
+.support-title{
+  font-weight:700;
+  margin-bottom:6px;
+  color:#fff;
+}
+
+.btn-outline{
+  display:inline-block;
+  margin-top:8px;
+  padding:8px 12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.35);
+  color:#fff;
+  text-decoration:none;
+  font-size:13px;
+}
+.btn-outline:hover{
+  background: rgba(255,255,255,0.08);
+}
+
+@media (max-width: 900px){
+  .demande-grid{ grid-template-columns: 1fr; }
+  .form-grid{ grid-template-columns: 1fr; }
+  .demande-hero{ flex-direction:column; align-items:flex-start; }
+}
+/* ===== Global dark background ===== */
+body{
+  background:
+    radial-gradient(900px 500px at 10% -10%, #1a2a6c 0%, transparent 60%),
+    radial-gradient(900px 600px at 90% -5%, #0f4c81 0%, transparent 60%),
+    #05060f;
+  color:#fff;
+}
+
+/* ===== Navbar (menu) ===== */
+.nav{
+  position: sticky;
+  top:0;
+  z-index:50;
+  background: rgba(5,6,15,0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-inner{
+  max-width:1100px;
+  margin:0 auto;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  font-weight:800;
+  font-size:20px;
+  color:#fff !important;
+  text-decoration:none;
+  letter-spacing:.3px;
+}
+.links{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+.links a{
+  color:#cfd7ff !important;
+  text-decoration:none;
+  font-size:14px;
+  opacity:.9;
+  padding:8px 10px;
+  border-radius:10px;
+}
+.links a:hover{
+  background: rgba(255,255,255,0.06);
+  opacity:1;
+}
+
+/* bouton contact f menu */
+.links .btn-outline{
+  border:1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.04);
+  font-weight:600;
+}
+.links .btn-outline:hover{
+  background: rgba(255,255,255,0.10);
+}
+
+/* ===== Demande hero text ===== */
+.demande-hero h1{
+  color:#fff;
+}
+.demande-hero p{
+  color:#cbd5ff;
+  opacity:.9;
+}
+
+/* ===== Selected car badge ===== */
+.selected-car{
+  background: rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+/* ===== Cards darker + 3D ===== */
+.demande-card,
+.info-card{
+  background: linear-gradient(180deg, rgba(10,14,32,0.98), rgba(6,9,20,0.98));
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 18px 50px rgba(0,0,0,0.65),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* form inputs darker */
+.field input, .field textarea{
+  background: rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.10);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+}
+
+/* focus glow */
+.field input:focus, .field textarea:focus{
+  border-color:#6aa6ff;
+  box-shadow:
+    0 0 0 3px rgba(106,166,255,.18),
+    inset 0 1px 2px rgba(0,0,0,0.6);
+}
+
+/* submit button a bit more contrast */
+.btn-primary{
+  background: linear-gradient(135deg,#3d6bff,#62d2ff);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+.btn-primary:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.6);
+}
+/* ===== Contact page ===== */
+.contact-wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:40px 18px 70px;
+}
+
+.contact-hero{
+  margin-bottom:18px;
+}
+.contact-hero h1{
+  font-size:32px;
+  margin:0 0 6px;
+  color:#fff;
+}
+.contact-hero p{
+  margin:0;
+  color:#cbd5ff;
+  opacity:.9;
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:16px;
+}
+
+/* نفس ستايل cards */
+.contact-card{
+  background: linear-gradient(180deg, rgba(10,14,32,0.98), rgba(6,9,20,0.98));
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:
+    0 18px 50px rgba(0,0,0,0.65),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.contact-card h2{
+  margin:0 0 14px;
+  font-size:18px;
+  color:#fff;
+}
+
+.success-msg{
+  margin-top:12px;
+  padding:10px 12px;
+  border-radius:10px;
+  background: rgba(70,255,170,0.12);
+  border:1px solid rgba(70,255,170,0.25);
+  color:#c9ffe6;
+  font-size:14px;
+}
+
+@media (max-width: 900px){
+  .contact-grid{ grid-template-columns: 1fr; }
+}

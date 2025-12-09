@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contactez-nous - AutoRent</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- Navbar نفس ديال demande -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="{{ url_for('index') }}" class="logo">AutoRent</a>
+      <div class="links">
+        <a href="{{ url_for('index') }}">Accueil</a>
+        <a href="{{ url_for('nos_voitures') }}">Nos voitures</a>
+        <a class="btn-outline" href="{{ url_for('contact') }}">Contactez-nous</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="contact-wrap">
+    <div class="contact-hero">
+      <div>
+        <h1>Contactez-nous</h1>
+        <p>Une question, une demande spécifique ou un devis ? Envoyez-nous un message et nous vous répondrons rapidement.</p>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Form Card -->
+      <form class="contact-card" method="POST" action="{{ url_for('contact') }}">
+        <h2>Envoyer un message</h2>
+
+        <div class="form-grid">
+          <div class="field">
+            <label>Nom complet <span>*</span></label>
+            <input type="text" name="nom" value="{{ form.get('nom','') }}" placeholder="Ex: Ahmed El Fassi">
+            {% if errors.get('nom') %}<small class="err">{{ errors['nom'] }}</small>{% endif %}
+          </div>
+
+          <div class="field">
+            <label>Email <span>*</span></label>
+            <input type="email" name="email" value="{{ form.get('email','') }}" placeholder="exemple@mail.com">
+            {% if errors.get('email') %}<small class="err">{{ errors['email'] }}</small>{% endif %}
+          </div>
+
+          <div class="field field-full">
+            <label>Message <span>*</span></label>
+            <textarea name="message" rows="6" placeholder="Votre message...">{{ form.get('message','') }}</textarea>
+            {% if errors.get('message') %}<small class="err">{{ errors['message'] }}</small>{% endif %}
+          </div>
+        </div>
+
+        <button class="btn-primary" type="submit">Envoyer</button>
+
+        {% if sent %}
+          <div class="success-msg">✅ Message envoyé avec succès. Merci !</div>
+        {% endif %}
+      </form>
+
+      <!-- Infos Card -->
+      <aside class="info-card">
+        <h3>Infos utiles</h3>
+        <ul>
+          <li>Réponse rapide par email ou téléphone.</li>
+          <li>Disponible 7j/7 selon horaires de l’agence.</li>
+          <li>Pour une réservation urgente, appelez-nous directement.</li>
+        </ul>
+
+        <div class="support-box">
+          <div class="support-title">Horaires</div>
+          <p>Lun-Sam : 9h-19h<br>Dimanche : 10h-14h</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+</body>
+</html>

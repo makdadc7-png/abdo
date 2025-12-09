@@ -1,0 +1,43 @@
+{% extends "base_admin.html" %}
+{% block content %}
+<h1>Contrats</h1>
+
+<a class="btn-small" href="{{ url_for('admin_contrat_new') }}">+ Nouveau contrat</a>
+
+<table class="tbl admin-table" style="margin-top:12px;">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Client</th>
+      <th>Voiture</th>
+      <th>Dates</th>
+      <th>Total</th>
+      <th>Source</th>
+      <th>Détails</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in contrats %}
+    <tr>
+      <td>#{{ c.id }}</td>
+      <td>{{ c.client_nom }}</td>
+      <td>{{ c.voiture_nom }}</td>
+      <td>{{ c.date_debut }} → {{ c.date_fin }}</td>
+      <td>{% if c.total %}{{ '%.0f'|format(c.total) }} DH{% else %}-{% endif %}</td>
+      <td>
+        {% if c.demande_id %}
+          Reservation #{{ c.demande_id }}
+        {% else %}
+          Manuel
+        {% endif %}
+      </td>
+      <td>
+        <a class="btn-small" href="{{ url_for('admin_facture', rid=c.demande_id) if c.demande_id else url_for('admin_contrat_view', cid=c.id) }}">
+          Voir
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

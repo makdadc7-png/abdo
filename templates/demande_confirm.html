@@ -1,0 +1,7 @@
+{% extends "base_client.html" %}
+{% block content %}
+<h1>Merci {{ form.nom }} !</h1>
+<p>Votre demande pour <strong>{{ form.voiture }}</strong> a été enregistrée.</p>
+<p>Nous vous contacterons au {{ form.tel }} pour confirmer la réservation.</p>
+<a class='btn' href='{{ url_for("index") }}'>Retour à l'accueil</a>
+{% endblock %}

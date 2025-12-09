@@ -1,0 +1,152 @@
+{% extends "base_admin.html" %}
+
+{% block content %}
+
+<h1 class="admin-page-title">Tableau de bord</h1>
+
+<!-- ===== CARTES STATISTIQUES ===== -->
+<div class="admin-stats-row">
+  <div class="admin-stat-card">
+    <div class="stat-icon">📅</div>
+    <div class="stat-label">Nombre de réservations</div>
+    <div class="stat-value">{{ total_reservations }}</div>
+  </div>
+
+  <div class="admin-stat-card">
+    <div class="stat-icon">🚗</div>
+    <div class="stat-label">Véhicules disponibles</div>
+    <div class="stat-value">{{ total_disponibles }}</div>
+  </div>
+
+  <div class="admin-stat-card">
+    <div class="stat-icon">✅</div>
+    <div class="stat-label">Loués</div>
+    <div class="stat-value">{{ total_loues }}</div>
+  </div>
+
+  <div class="admin-stat-card">
+    <div class="stat-icon">👤</div>
+    <div class="stat-label">Clients</div>
+    <div class="stat-value">{{ total_clients }}</div>
+  </div>
+</div>
+
+<!-- ===== SECTIONS DU BAS ===== -->
+<div class="admin-section-row">
+
+  <!-- Voitures accidentées -->
+  <section class="admin-section">
+    <div class="admin-section-header danger">
+      <div class="section-title-left">
+        <span class="section-icon">⚠️</span>
+        <h2>Voitures accidentées</h2>
+      </div>
+    </div>
+
+    {% if accident_cars %}
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Voiture</th>
+            <th>Statut</th>
+            <th>Dégât</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for v in accident_cars %}
+          <tr>
+            <td>{{ v.nom }}</td>
+            <td>{{ v.statut }}</td>
+            <td>{{ v.degat }}</td>
+            <td class="admin-table-actions">
+              <a href="{{ url_for('admin_voitures_detail', voiture_id=v.id) }}">Voir / Modifier</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="admin-empty">Aucune voiture accidentée pour le moment.</p>
+    {% endif %}
+  </section>
+
+  <!-- Voitures proches de la visite technique -->
+  <section class="admin-section">
+    <div class="admin-section-header warning">
+      <div class="section-title-left">
+        <span class="section-icon">🛠️</span>
+        <h2>Voitures proches de la visite technique</h2>
+      </div>
+    </div>
+
+    {% if visite_cars %}
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Voiture</th>
+            <th>Date dernière visite</th>
+            <th>Prochaine visite</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for v in visite_cars %}
+          <tr>
+            <td>{{ v.nom }}</td>
+            <td>{{ v.derniere_visite }}</td>
+            <td>{{ v.prochaine_visite }}</td>
+            <td class="admin-table-actions">
+              <a href="{{ url_for('admin_voitures_detail', voiture_id=v.id) }}">Voir</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="admin-empty">Aucune visite technique proche.</p>
+    {% endif %}
+  </section>
+
+  <!-- Assurance bientôt expirée -->
+  <section class="admin-section">
+    <div class="admin-section-header assurance">
+      <div class="section-title-left">
+        <span class="section-icon">🛡️</span>
+        <h2>Assurance bientôt expirée</h2>
+      </div>
+    </div>
+
+    {% if assurance_cars %}
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Voiture</th>
+            <th>Date fin d’assurance</th>
+            <th>Jours restants</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for v in assurance_cars %}
+          <tr>
+            <td>{{ v.nom }}</td>
+            <td>{{ v.assurance_fin }}</td>
+            <td>{{ v.jours_restants }}</td>
+            <td class="admin-table-actions">
+              <a href="{{ url_for('admin_voitures_detail', voiture_id=v.id) }}">Voir / Renouveler</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="admin-empty">Aucune assurance proche de l’expiration.</p>
+    {% endif %}
+  </section>
+
+</div>
+
+
+
+{% endblock %}

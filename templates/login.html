@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang='fr'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Connexion admin</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' href='{{ url_for("static", filename="style.css") }}'>
+</head>
+<body class='login'>
+  <div class='login-box'>
+    <h1>Admin AutoRent</h1>
+    {% if error %}<p class='err'>{{ error }}</p>{% endif %}
+    <form method='POST'>
+      <label>Nom d'utilisateur
+        <input name='username'>
+      </label>
+      <label>Mot de passe
+        <input type='password' name='password'>
+      </label>
+      <button class='btn' type='submit'>Se connecter</button>
+    </form>
+  </div>
+</body>
+</html>

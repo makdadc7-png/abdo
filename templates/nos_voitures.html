@@ -1,0 +1,64 @@
+{% extends "base_client.html" %}
+{% block content %}
+
+<section class="page-head">
+  <h1>Nos voitures</h1>
+  <p class="muted">Toutes les voitures disponibles et louées de notre stock.</p>
+</section>
+
+<section class="section-cars">
+  <div class="section-header">
+    <h2>Voitures disponibles</h2>
+    <p class="muted">Prêtes à être réservées maintenant.</p>
+  </div>
+
+  <div class="cars">
+    {% for v in dispo %}
+      <article class="car-card">
+        {% if v.image %}
+          <img src="{{ url_for('static', filename='uploads/' + v.image) }}" alt="{{ v.nom }}">
+        {% else %}
+          <div class="img-placeholder">Image</div>
+        {% endif %}
+        <h3>{{ v.nom }}</h3>
+        <p class="muted">{{ v.categorie }}</p>
+        <p><strong>{{ v.prix_jour }} DH / jour</strong></p>
+
+        <span class="badge badge-green">Disponible</span>
+
+        <a class="btn" href="{{ url_for('demande') }}?car={{ v.nom }}">Demander</a>
+      </article>
+    {% else %}
+      <p class="muted">Aucune voiture disponible pour le moment.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-cars">
+  <div class="section-header">
+    <h2>Voitures louées</h2>
+    <p class="muted">Actuellement en location.</p>
+  </div>
+
+  <div class="cars">
+    {% for v in louees %}
+      <article class="car-card car-rented">
+        {% if v.image %}
+          <img src="{{ url_for('static', filename='uploads/' + v.image) }}" alt="{{ v.nom }}">
+        {% else %}
+          <div class="img-placeholder">Image</div>
+        {% endif %}
+        <h3>{{ v.nom }}</h3>
+        <p class="muted">{{ v.categorie }}</p>
+        <p><strong>{{ v.prix_jour }} DH / jour</strong></p>
+
+        <span class="badge badge-red">Louée</span>
+        <button class="btn btn-disabled" disabled>Indisponible</button>
+      </article>
+    {% else %}
+      <p class="muted">Aucune voiture louée actuellement.</p>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

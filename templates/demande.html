@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Demande de réservation - AutoRent</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- نفس navbar ديالك إلا بغيتي -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="{{ url_for('index') }}" class="logo">AutoRent</a>
+      <div class="links">
+        <a href="{{ url_for('index') }}">Accueil</a>
+        <a href="{{ url_for('nos_voitures') }}">Nos voitures</a>
+        <a class="btn-outline" href="{{ url_for('contact') }}">Contactez-nous</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="demande-wrap">
+    <div class="demande-hero">
+      <div>
+        <h1>Demande de réservation</h1>
+        <p>Remplissez le formulaire ci-dessous. Nous vous contacterons pour confirmer la disponibilité.</p>
+      </div>
+
+      {% if car %}
+      <div class="selected-car">
+        <div class="badge">Voiture sélectionnée</div>
+        <div class="car-name">{{ car }}</div>
+        <div class="car-hint">Vous pouvez la changer dans le formulaire.</div>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="demande-grid">
+      <form class="demande-card" method="POST" action="{{ url_for('demande_post') }}">
+        <h2>Vos informations</h2>
+
+        <div class="form-grid">
+          <div class="field">
+            <label>Nom complet <span>*</span></label>
+            <input type="text" name="nom" value="{{ form.get('nom','') }}">
+            {% if errors.get('nom') %}<small class="err">{{ errors['nom'] }}</small>{% endif %}
+          </div>
+
+          <div class="field">
+            <label>Téléphone <span>*</span></label>
+            <input type="text" name="tel" value="{{ form.get('tel','') }}">
+            {% if errors.get('tel') %}<small class="err">{{ errors['tel'] }}</small>{% endif %}
+          </div>
+
+          <div class="field">
+            <label>Email</label>
+            <input type="email" name="email" value="{{ form.get('email','') }}">
+          </div>
+
+          <div class="field">
+            <label>Ville <span>*</span></label>
+            <input type="text" name="ville" value="{{ form.get('ville','') }}">
+            {% if errors.get('ville') %}<small class="err">{{ errors['ville'] }}</small>{% endif %}
+          </div>
+
+          <div class="field">
+            <label>Date début <span>*</span></label>
+            <input type="date" name="date_debut" value="{{ form.get('date_debut','') }}">
+            {% if errors.get('date_debut') %}<small class="err">{{ errors['date_debut'] }}</small>{% endif %}
+          </div>
+
+          <div class="field">
+            <label>Date fin <span>*</span></label>
+            <input type="date" name="date_fin" value="{{ form.get('date_fin','') }}">
+            {% if errors.get('date_fin') %}<small class="err">{{ errors['date_fin'] }}</small>{% endif %}
+          </div>
+
+          <div class="field field-full">
+            <label>Voiture souhaitée <span>*</span></label>
+            <input type="text" name="voiture" value="{{ form.get('voiture', car or '') }}">
+            {% if errors.get('voiture') %}<small class="err">{{ errors['voiture'] }}</small>{% endif %}
+          </div>
+
+          <div class="field field-full">
+            <label>Notes</label>
+            <textarea name="notes" rows="4">{{ form.get('notes','') }}</textarea>
+          </div>
+        </div>
+
+        <button class="btn-primary" type="submit">Envoyer la demande</button>
+        <div class="mini-note">* Aucun paiement en ligne. Confirmation par téléphone.</div>
+      </form>
+
+      <aside class="info-card">
+        <h3>Infos utiles</h3>
+        <ul>
+          <li>Nous vous rappelons pour confirmer la disponibilité.</li>
+          <li>Aucun paiement en ligne n’est requis.</li>
+          <li>Pensez à votre CIN et permis le jour J.</li>
+          <li>Annulation possible avant confirmation.</li>
+        </ul>
+
+        <div class="support-box">
+          <div class="support-title">Besoin d’aide ?</div>
+          <p>Contactez-nous via la page Contact ou par téléphone.</p>
+          <a class="btn-outline" href="{{ url_for('contact') }}">Contactez-nous</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends "base_admin.html" %}
+{% block content %}
+<h1>Clients</h1>
+<form method='POST' class='grid'>
+  <label>Prénom <input name='prenom'></label>
+  <label>Nom <input name='nom'></label>
+  <label>Téléphone <input name='tel'></label>
+  <label>Numéro CNI <input name='cin_num'></label>
+  <label>Numéro Permis <input name='permis_num'></label>
+  <button class='btn' type='submit'>Enregistrer</button>
+</form>
+<table class='tbl'>
+  <tr><th>#</th><th>Nom complet</th><th>Tél</th><th>CNI</th><th>Permis</th><th>Créé le</th></tr>
+  {% for c in clients %}
+  <tr>
+    <td>{{ c.id }}</td>
+    <td>{{ c.prenom }} {{ c.nom }}</td>
+    <td>{{ c.tel }}</td>
+    <td>{{ c.cin_num }}</td>
+    <td>{{ c.permis_num }}</td>
+    <td>{{ c.created_at }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
